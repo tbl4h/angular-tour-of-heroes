@@ -15,6 +15,9 @@
     height: 1.6em;
     border-radius: 4px;
 }
+.heroes li.antyHero { 
+  background-color:  rgb(214, 52, 52);
+}
 .heroes li:hover {
     color: #607D8B;
     background-color: #DDD;

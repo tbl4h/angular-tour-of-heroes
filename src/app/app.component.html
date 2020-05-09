@@ -1,3 +1,13 @@
 <h1>{{title}}</h1>
-<app-heroes></app-heroes>
+<!-- App display to app-heroes component only by link. -->
+<!-- <app-heroes></app-heroes> -->
+<!-- router-outlet viev (router directives) template is available in current template 
+     becouse AppModule imports AppRoutingModule wihich export RouterModule 
+-->
+<nav> 
+    <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/heroes">Heroes</a>&nbsp;&nbsp; <!--- no-braking-spaces -->
+    <a href="https://www.google.com/">Google</a>
+</nav>
+<router-outlet></router-outlet>
 <app-messages></app-messages>

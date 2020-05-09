@@ -15,19 +15,54 @@ export class HeroesComponent implements OnInit {
 
   heroes: Hero[];
 
-  constructor(private heroService: HeroService, private messageService: MessageService) { }
+  someNumbers: number[];
+
+  buttonOn: boolean;
+
+  testNumber: number;
+
+  constructor(private heroService: HeroService) {} // , private messageService: MessageService) { }
 
   ngOnInit() {
     this.getHeroes();
+    this.buttonOn = false;
+    this.someNumbers = [];
   }
-
-  onSelect(hero: Hero): void {
+    //Death code
+  /*onSelect(hero: Hero): void {
     this.selectedHero = hero;
     this.messageService.add(`HeroService: Selected hero id=${hero.id}`);
-  }
+  }*/
 
   getHeroes(): void {
+    // getHeroes() return Observable object witch emit an array of Hero objects.
+    // then function subscribe catching that object and observe them using heroes observer
+    // created by annonymus arrow function invoked as subscribe parameter.
+    // Q: does heroe observer and observer emmited by service (getHeroes()) should be same the same type ?
     this.heroService.getHeroes()
-        .subscribe(heroes => this.heroes = heroes);
+        .subscribe(heroes => {
+
+          if (this.heroes === undefined || this.heroes.length === 0   ) {
+            this.heroes = heroes;
+          }
+          else {
+            this.heroes =  this.heroes.concat(heroes);
+            this.heroes = this.heroes.sort((x, y) => x.id - y.id);
+          }
+          console.log(this.heroes);
+        } );
+  }
+
+
+  getNumber(): void {
+    //
+    this.buttonOn = true;
+    this.heroService.getNumber()
+    .subscribe(someNumber => {
+
+                              this.someNumbers.push(someNumber);
+                              this.someNumbers = [... new Set(this.someNumbers)];
+                              console.log(this.someNumbers);
+                              });
   }
 }
